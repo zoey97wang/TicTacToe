@@ -52,12 +52,12 @@ public class TTT {
 			for(int c = 0;c<COLS;c++){
 				printCell(board[r][c]);
 				if(c != COLS-1){
-					System.out.print("|");
+					System.out.print(" | ");
 				}
 			}
 			System.out.println();
 			if(r != ROWS-1){
-				System.out.println("-----------------");
+				System.out.println("----------");
 			}
 		}
 		System.out.println();
@@ -68,11 +68,11 @@ public class TTT {
 	private static void printCell(int i) {
 		// TODO Auto-generated method stub
 		switch (i) {
-		case EMPTY: System.out.println(" ");
+		case EMPTY: System.out.print(" ");
 			break;
-		case CIRCLE: System.out.println("O");
+		case CIRCLE: System.out.print("O");
 			break;
-		case CROSS: System.out.println("X");
+		case CROSS: System.out.print("X");
 			break;
 		default:
 			System.out.println(" ");
@@ -103,7 +103,7 @@ public class TTT {
 				board[row][col] = EMPTY;
 			}
 		}
-		currentState  = PLAYING;
+		currentState  = CIRCLE_WON;
 		currentPlayer = CROSS;
 	}
 
