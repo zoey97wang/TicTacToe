@@ -84,26 +84,22 @@ public class TTT {
 	private static void playerMove(int currentPlayer2) {
 		// TODO Auto-generated method stub
 		// while loop to check valid Input;
-		boolean validInputRow =  false;
-		boolean validInputCol =  false;
-		while(!validInputCol||!validInputRow){
+		boolean validInput = false;
+		while(!validInput){
 			String player = (currentPlayer2 == 1)?"X":"O";
-			System.out.println("Player "+player+" Please input your row between 0-2: ");
-			int temp = in.nextInt();
-			if(temp < 3 && temp > -1){
-				currentRow = temp;
-				validInputRow = true;
-			}
+			System.out.println("Player "+player+" Please input your row and column between 0-2: ");
+			int row = in.nextInt();
+			int col = in.nextInt();
+			if(row>2 || row<0 || col>2 || col<0)
+				System.out.println("Please input row and column number between 0 to 2");
+			else if(board[row][col] != EMPTY)
+				System.out.println("Please choose a Empty node");
 			else
-				System.out.println("Please input row number between 0 to 2");
-			System.out.println("Player "+player+"Please input your col between 0-2: ");
-			int tempCol = in.nextInt();
-			if(tempCol < 3 && tempCol > -1){
-				currentCol = tempCol;
-				validInputCol = true;
+			{
+				currentCol = col;
+				currentRow = row;
+				validInput = true;
 			}
-			else
-				System.out.println("Please input row number between 0 to 2");
 		}
 	}
 
