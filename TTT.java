@@ -83,41 +83,63 @@ public class TTT {
 
 	private static void playerMove(int currentPlayer2) {
 		// TODO Auto-generated method stub
-		String player = (currentPlayer2 == 1)?"X":"O";
-		System.out.println("Player "+player+" Please input your row: ");
-		int temp = in.nextInt();
-		if(temp < 3 && temp > -1)
-		currentRow = temp;
-		else
-			System.out.println("Please input row number between 0 to 2");
-		System.out.println("Please input your col: ");
-		currentCol = in.nextInt();
+		// while loop to check valid Input;
+		boolean validInputRow =  false;
+		boolean validInputCol =  false;
+		while(!validInputCol||!validInputRow){
+			String player = (currentPlayer2 == 1)?"X":"O";
+			System.out.println("Player "+player+" Please input your row between 0-2: ");
+			int temp = in.nextInt();
+			if(temp < 3 && temp > -1){
+				currentRow = temp;
+				validInputRow = true;
+			}
+			else
+				System.out.println("Please input row number between 0 to 2");
+			System.out.println("Player "+player+"Please input your col between 0-2: ");
+			int tempCol = in.nextInt();
+			if(tempCol < 3 && tempCol > -1){
+				currentCol = tempCol;
+				validInputCol = true;
+			}
+			else
+				System.out.println("Please input row number between 0 to 2");
+		}
 	}
 
 
 	private static void updateGame(int currentPlayer2, int currentRow2, int currentCol2) {
 		// TODO Auto-generated method stub
 		board[currentRow2][currentCol2] = currentPlayer2;
-		for(int r=0;r<ROWS;r++){
-				if(board[r][currentCol2]!=currentPlayer2){
-					System.out.println("no win for col");
-					currentState  = PLAYING;
-					break;
-				}
-				currentState = (currentPlayer2 == CROSS)?CROSS:CIRCLE;
-		}
-		if(currentState == PLAYING){
-			for(int c=0;c<COLS;c++){
-				if(board[currentRow2][c]!=currentPlayer2){
-					currentState  = PLAYING;
-					break;
-				}
-				currentState = (currentPlayer2 == CROSS)?CROSS:CIRCLE;
-			}
-		}
+		if(won(currentPlayer2, currentRow2, currentCol2))
+		currentState = (currentPlayer2 == CROSS)?CROSS:CIRCLE;
+		else if(draw())
+			currentState = 3;
+	}
+	
+	public static boolean won(int currentPlayer, int currentRow, int currentCol){
+		if(board[currentRow][0]==currentPlayer&&board[currentRow][1]==currentPlayer&&board[currentRow][2]==currentPlayer)
+			return true;
+		if(board[0][currentCol]==currentPlayer&&board[1][currentCol]==currentPlayer&&board[2][currentCol]==currentPlayer)
+			return true;
+		if(board[0][0]==currentPlayer&&board[1][1]==currentPlayer&&board[2][2]==currentPlayer)
+			return true;
+		if(board[2][0]==currentPlayer&&board[1][1]==currentPlayer&&board[0][2]==currentPlayer)
+			return true;
+		return false;
 	}
 
 
+	public static boolean draw(){
+		for(int i=0;i<ROWS;i++){
+			for(int j=0;j<COLS;j++){
+				if(board[i][j]==EMPTY)
+					return false;
+			}
+		}
+		return true;
+	}
+	
 
 	private static void initGame() {
 		// TODO Auto-generated method stub
