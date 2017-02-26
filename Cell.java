@@ -5,9 +5,9 @@ public class Cell {
 	Seed content;
 	int col, row;   //row and col of this seed not used for now;
 	
-	public void Cell(int row, int col){
-		this.col = col;
+	public Cell(int row, int col){
 		this.row = row;
+		this.col = col;
 		clear();
 	}
 	
